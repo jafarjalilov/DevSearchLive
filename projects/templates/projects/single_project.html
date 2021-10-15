@@ -1,5 +1,13 @@
 {% extends 'main.html' %}
 
 {% block content %}
-    <h1>Project: {{pk}}</h1>
+    <h1>{{ single_project.title }}<span>{{ single_project.created }}</span></h1>
+    {% for tag in tags %}
+        <span>{{ tag }}</span>
+    {% endfor %}
+    <p>{{ single_project.description }}</p>
+    <h3>Reviews</h3>
+    {% for review in reviews %}
+        <p>{{ review.body }}</p> 
+    {% endfor %}
 {% endblock content %}
