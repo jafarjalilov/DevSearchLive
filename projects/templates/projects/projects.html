@@ -8,6 +8,8 @@
         <tr>
             <th>Title</th>
             <th>Description</th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
 
@@ -16,6 +18,8 @@
             <tr>
                 <td><a href="{% url 'single_project' project.id %}">{{ project.title }}</a></td>
                 <td>{{ project.description }}</td>
+                <td><a href="{% url 'update_project' project.id %}">UPDATE</a></td>
+                <td><a href="{% url 'delete_project' project.id %}">DELETE</a></td>
             </tr>
         {% endfor %}
     </tbody>

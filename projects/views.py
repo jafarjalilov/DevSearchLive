@@ -25,4 +25,25 @@ def create_project(request):
     else:
         form = CreateProjectForm()
     context = {'form':form}
-    return render(request, 'projects/create_project.html', context)
+    return render(request, 'projects/create.html', context)
+
+def update_project(request, pk):
+    project = Project.objects.get(id = pk)
+    form = CreateProjectForm(instance=project)
+    if request.method == 'POST':
+        updatedProject = CreateProjectForm(data=request.POST, instance=project)
+        updatedProject.save()
+        return redirect('projects_list')
+    context = {'form': form }
+    return render(request, 'projects/create.html', context)
+
+def delete_project(request, pk):
+    project = Project.objects.get(id = pk)
+    template = 'projects/delete.html'
+    context = { 'project': project }
+
+    if request.method == 'POST':
+        project.delete()
+        return redirect('projects_list')
+
+    return render(request, template, context)
