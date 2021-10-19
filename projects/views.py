@@ -17,10 +17,10 @@ def single_project(request, pk):
 
 def create_project(request):
     if request.method == 'POST':
-        print("Form DATA: ", request.POST)
-        form = CreateProjectForm(data=request.POST)
+        # print("Form DATA: ", request.POST, request.FILES)
+        form = CreateProjectForm(request.POST, request.FILES)
         if form.is_valid():
-            newProject = form.save()
+            form.save()
             return redirect('projects_list')
     else:
         form = CreateProjectForm()
@@ -31,7 +31,7 @@ def update_project(request, pk):
     project = Project.objects.get(id = pk)
     form = CreateProjectForm(instance=project)
     if request.method == 'POST':
-        updatedProject = CreateProjectForm(data=request.POST, instance=project)
+        updatedProject = CreateProjectForm(request.POST, request.FILES, instance=project)
         updatedProject.save()
         return redirect('projects_list')
     context = {'form': form }
